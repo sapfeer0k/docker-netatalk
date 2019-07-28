@@ -9,7 +9,7 @@ RUN apk add --update dbus avahi bash shadow \
     && rm -rf /var/cache/apk/*
 RUN mkdir -p /var/run/dbus
 COPY avahi-daemon.conf /etc/avahi/avahi-daemon.conf
-
+COPY afpd.service /etc/avahi/services/afpd.service
 #######################
 # Netatalk section
 #######################
