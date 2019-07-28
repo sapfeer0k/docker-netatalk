@@ -7,7 +7,7 @@ set -e
 
 helpers::avahi(){
   # On container restart, cleanup the crap
-  rm -f /var/run/dbus/pid
+  rm -f /var/run/dbus.pid
   rm -f /run/avahi-daemon/pid
 
   # Not really useful, but then
