@@ -1,22 +1,20 @@
 #######################
 # Usual avahi/dbus image
 #######################
-FROM debian:buster-slim
-MAINTAINER dubo-dubon-duponey@jsboot.space
+FROM arm32v6/alpine
+MAINTAINER sergei@lomakov.net
 
 WORKDIR /dubo-dubon-duponey
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends dbus avahi-daemon \
-  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+RUN apk add --update dbus avahi bash shadow \
+    && rm -rf /var/cache/apk/*
 RUN mkdir -p /var/run/dbus
 COPY avahi-daemon.conf /etc/avahi/avahi-daemon.conf
 
 #######################
 # Netatalk section
 #######################
-RUN apt-get update \
-  && apt-get install -y --no-install-recommends netatalk \
-  && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+RUN apk add --update netatalk \
+    && rm -rf /var/cache/apk/*
 
 COPY afp.conf /etc/afp.conf
 # XXX per-user connections require this?
